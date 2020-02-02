@@ -27,6 +27,17 @@ import locale from 'antd/es/date-picker/locale/nl_NL';
 const { Option } = Select;
 const { Step } = Stepper;
 
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 4 }
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 20 }
+    }
+};
+
 class Persoonsgegevens extends Component<FormComponentProps & any> {
     handleSubmit = e => {
         e.preventDefault();
@@ -40,17 +51,6 @@ class Persoonsgegevens extends Component<FormComponentProps & any> {
 
     render() {
         const { getFieldDecorator } = this.props.form;
-
-        const formItemLayout = {
-            labelCol: {
-                xs: { span: 24 },
-                sm: { span: 4 }
-            },
-            wrapperCol: {
-                xs: { span: 24 },
-                sm: { span: 20 }
-            }
-        };
 
         const prefixSelector = getFieldDecorator('prefix', {
             initialValue: '31'
@@ -69,7 +69,7 @@ class Persoonsgegevens extends Component<FormComponentProps & any> {
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je roepnaam in.',
+                                message: 'Vul alsjeblieft de roepnaam in.',
                                 whitespace: true
                             }
                         ]
@@ -81,7 +81,7 @@ class Persoonsgegevens extends Component<FormComponentProps & any> {
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je voornamen in.',
+                                message: 'Vul alsjeblieft de voornamen in.',
                                 whitespace: true
                             }
                         ]
@@ -99,10 +99,11 @@ class Persoonsgegevens extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Achternaam">
                     {getFieldDecorator('achternaam', {
+                        initialValue: this.props.formData['achternaam'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je achternaam in.',
+                                message: 'Vul alsjeblieft de achternaam in.',
                                 whitespace: true
                             }
                         ]
@@ -110,7 +111,8 @@ class Persoonsgegevens extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Geslacht">
                     {getFieldDecorator('geslacht', {
-                        rules: [{ required: true, message: 'Vul alsjeblieft je geslacht in.' }]
+                        initialValue: this.props.formData['geslacht'],
+                        rules: [{ required: true, message: 'Vul alsjeblieft het geslacht in.' }]
                     })(
                         <Select>
                             <Option value="M">Man</Option>
@@ -130,15 +132,17 @@ class Persoonsgegevens extends Component<FormComponentProps & any> {
                     }
                 >
                     {getFieldDecorator('telefoonnummer', {
+                        initialValue: this.props.formData['telefoonnummer'],
                         rules: []
                     })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
                 </Form.Item>
                 <Form.Item label="BSN">
                     {getFieldDecorator('bsn', {
+                        initialValue: this.props.formData['bsn'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je BSN in.'
+                                message: 'Vul alsjeblieft het BSN in.'
                             },
                             {
                                 message: 'Vul alsjeblieft een geldig BSN in.',
@@ -156,21 +160,23 @@ class Persoonsgegevens extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Geboortedatum">
                     {getFieldDecorator('geboortedatum', {
+                        initialValue: this.props.formData['geboortedatum'],
                         rules: [
                             {
                                 type: 'object',
                                 required: true,
-                                message: 'Vul alsjeblieft je geboortedatum in.'
+                                message: 'Vul alsjeblieft de geboortedatum in.'
                             }
                         ]
                     })(<DatePicker format={'DD-MM-YYYY'} locale={locale} />)}
                 </Form.Item>
                 <Form.Item label="Geboorteplaats">
                     {getFieldDecorator('geboorteplaats', {
+                        initialValue: this.props.formData['geboorteplaats'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je geboorteplaats in.',
+                                message: 'Vul alsjeblieft de geboorteplaats in.',
                                 whitespace: true
                             }
                         ]
@@ -178,10 +184,11 @@ class Persoonsgegevens extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Postcode">
                     {getFieldDecorator('postcode', {
+                        initialValue: this.props.formData['postcode'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je postcode in.',
+                                message: 'Vul alsjeblieft de postcode in.',
                                 whitespace: true
                             }
                         ]
@@ -189,10 +196,11 @@ class Persoonsgegevens extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Huisnummer">
                     {getFieldDecorator('huisnummer', {
+                        initialValue: this.props.formData['huisnummer'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je huisnummer in.',
+                                message: 'Vul alsjeblieft het huisnummer in.',
                                 whitespace: true
                             }
                         ]
@@ -200,10 +208,11 @@ class Persoonsgegevens extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Straat">
                     {getFieldDecorator('straat', {
+                        initialValue: this.props.formData['straat'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je straat in.',
+                                message: 'Vul alsjeblieft de straat in.',
                                 whitespace: true
                             }
                         ]
@@ -211,10 +220,11 @@ class Persoonsgegevens extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Woonplaats">
                     {getFieldDecorator('woonplaats', {
+                        initialValue: this.props.formData['woonplaats'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je woonplaats in.',
+                                message: 'Vul alsjeblieft de woonplaats in.',
                                 whitespace: true
                             }
                         ]
@@ -241,37 +251,15 @@ class Basisschool extends Component<FormComponentProps & any> {
         });
     };
 
-    back = e => {
-        this.props.back();
-    };
-
     render() {
         const { getFieldDecorator } = this.props.form;
 
-        const formItemLayout = {
-            labelCol: {
-                xs: { span: 24 },
-                sm: { span: 4 }
-            },
-            wrapperCol: {
-                xs: { span: 24 },
-                sm: { span: 20 }
-            }
-        };
-
-        const prefixSelector = getFieldDecorator('prefix', {
-            initialValue: '31'
-        })(
-            <Select style={{ width: 70 }}>
-                <Option value="1">+1</Option>
-                <Option value="31">+31</Option>
-            </Select>
-        );
-
         return (
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-                <Form.Item label="Naam basisschool">
+                <b>Basisschool</b>
+                <Form.Item label="Naam">
                     {getFieldDecorator('basisschool-naam', {
+                        initialValue: this.props.formData['basisschool-naam'],
                         rules: [
                             {
                                 required: true,
@@ -281,8 +269,22 @@ class Basisschool extends Component<FormComponentProps & any> {
                         ]
                     })(<Input />)}
                 </Form.Item>
-                <Form.Item label="Naam leerkracht">
+                <Form.Item label="Locatie">
+                    {getFieldDecorator('basisschool-locatie', {
+                        initialValue: this.props.formData['basisschool-locatie'],
+                        rules: [
+                            {
+                                required: true,
+                                message: 'Vul alsjeblieft de locatie van de basisschool in.',
+                                whitespace: true
+                            }
+                        ]
+                    })(<Input />)}
+                </Form.Item>
+                <b>Leerkracht</b>
+                <Form.Item label="Naam">
                     {getFieldDecorator('basisschool-leerkracht-naam', {
+                        initialValue: this.props.formData['basisschool-leerkracht-naam'],
                         rules: [
                             {
                                 required: true,
@@ -294,6 +296,7 @@ class Basisschool extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Geslacht">
                     {getFieldDecorator('basisschool-leerkracht-geslacht', {
+                        initialValue: this.props.formData['basisschool-leerkracht-geslacht'],
                         rules: [
                             {
                                 required: true,
@@ -304,25 +307,12 @@ class Basisschool extends Component<FormComponentProps & any> {
                         <Select>
                             <Option value="M">Man</Option>
                             <Option value="V">Vrouw</Option>
+                            <Option value="X">Overig</Option>
                         </Select>
                     )}
                 </Form.Item>
-                <Form.Item
-                    label={
-                        <span>
-                            Telefoonnummer&nbsp;
-                            <Tooltip title="Telefoonnummer ouder/verzorger voor calamiteiten">
-                                <Icon type="question-circle-o" />
-                            </Tooltip>
-                        </span>
-                    }
-                >
-                    {getFieldDecorator('basisschool-leerkracht-telefoonnummer', {
-                        rules: []
-                    })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
-                </Form.Item>
                 <Form.Item style={{ float: 'left' }}>
-                    <Button type="primary" style={{ float: 'left' }} onClick={this.back}>
+                    <Button type="primary" style={{ float: 'left' }} onClick={this.props.back}>
                         <Icon type="caret-left" /> Vorige
                     </Button>
                 </Form.Item>
@@ -350,17 +340,6 @@ class Verzorgers extends Component<FormComponentProps & any> {
     render() {
         const { getFieldDecorator } = this.props.form;
 
-        const formItemLayout = {
-            labelCol: {
-                xs: { span: 24 },
-                sm: { span: 4 }
-            },
-            wrapperCol: {
-                xs: { span: 24 },
-                sm: { span: 20 }
-            }
-        };
-
         const prefixSelector = getFieldDecorator('prefix', {
             initialValue: '31'
         })(
@@ -375,10 +354,11 @@ class Verzorgers extends Component<FormComponentProps & any> {
                 <b>Ouder/verzorger 1</b>
                 <Form.Item label="Voorletters">
                     {getFieldDecorator('verzorger-1-voorletters', {
+                        initialValue: this.props.formData['verzorger-1-voorletters'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je voorletters in.',
+                                message: 'Vul alsjeblieft de voorletters in.',
                                 whitespace: true
                             }
                         ]
@@ -386,15 +366,17 @@ class Verzorgers extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Tussenvoegsel">
                     {getFieldDecorator('verzorger-1-tussenvoegsel', {
+                        initialValue: this.props.formData['verzorger-1-tussenvoegsel'],
                         rules: [{ whitespace: true }]
                     })(<Input />)}
                 </Form.Item>
                 <Form.Item label="Achternaam">
                     {getFieldDecorator('verzorger-1-achternaam', {
+                        initialValue: this.props.formData['verzorger-1-achternaam'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je achternaam in.',
+                                message: 'Vul alsjeblieft de achternaam in.',
                                 whitespace: true
                             }
                         ]
@@ -402,16 +384,18 @@ class Verzorgers extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Geslacht">
                     {getFieldDecorator('verzorger-1-geslacht', {
+                        initialValue: this.props.formData['verzorger-1-geslacht'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft het geslacht van de leerkracht in.'
+                                message: 'Vul alsjeblieft het geslacht in.'
                             }
                         ]
                     })(
                         <Select>
                             <Option value="M">Man</Option>
                             <Option value="V">Vrouw</Option>
+                            <Option value="X">Overig</Option>
                         </Select>
                     )}
                 </Form.Item>
@@ -426,15 +410,17 @@ class Verzorgers extends Component<FormComponentProps & any> {
                     }
                 >
                     {getFieldDecorator('verzorger-1-telefoonnummer', {
+                        initialValue: this.props.formData['verzorger-1-telefoonnummer'],
                         rules: []
                     })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
                 </Form.Item>
                 <Form.Item label="Postcode">
-                    {getFieldDecorator('postcode', {
+                    {getFieldDecorator('verzorger-1-postcode', {
+                        initialValue: this.props.formData['verzorger-1-postcode'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je postcode in.',
+                                message: 'Vul alsjeblieft de postcode in.',
                                 whitespace: true
                             }
                         ]
@@ -442,10 +428,11 @@ class Verzorgers extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Huisnummer">
                     {getFieldDecorator('verzorger-1-huisnummer', {
+                        initialValue: this.props.formData['verzorger-1-huisnummer'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je huisnummer in.',
+                                message: 'Vul alsjeblieft het huisnummer in.',
                                 whitespace: true
                             }
                         ]
@@ -453,10 +440,11 @@ class Verzorgers extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Straat">
                     {getFieldDecorator('verzorger-1-straat', {
+                        initialValue: this.props.formData['verzorger-1-straat'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je straat in.',
+                                message: 'Vul alsjeblieft de straat in.',
                                 whitespace: true
                             }
                         ]
@@ -464,10 +452,11 @@ class Verzorgers extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Woonplaats">
                     {getFieldDecorator('verzorger-1-woonplaats', {
+                        initialValue: this.props.formData['verzorger-1-woonplaats'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je woonplaats in.',
+                                message: 'Vul alsjeblieft de woonplaats in.',
                                 whitespace: true
                             }
                         ]
@@ -475,10 +464,11 @@ class Verzorgers extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="E-mailadres">
                     {getFieldDecorator('verzorger-1-email', {
+                        initialValue: this.props.formData['verzorger-1-email'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je e-mailadres in.',
+                                message: 'Vul alsjeblieft het e-mailadres in.',
                                 whitespace: true
                             }
                         ]
@@ -487,10 +477,11 @@ class Verzorgers extends Component<FormComponentProps & any> {
                 <b>Ouder/verzorger 2</b>
                 <Form.Item label="Voorletters">
                     {getFieldDecorator('verzorger-2-voorletters', {
+                        initialValue: this.props.formData['verzorger-2-voorletters'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je voorletters in.',
+                                message: 'Vul alsjeblieft de voorletters in.',
                                 whitespace: true
                             }
                         ]
@@ -498,15 +489,17 @@ class Verzorgers extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Tussenvoegsel">
                     {getFieldDecorator('verzorger-2-tussenvoegsel', {
+                        initialValue: this.props.formData['verzorger-2-tussenvoegsel'],
                         rules: [{ whitespace: true }]
                     })(<Input />)}
                 </Form.Item>
                 <Form.Item label="Achternaam">
                     {getFieldDecorator('verzorger-2-achternaam', {
+                        initialValue: this.props.formData['verzorger-2-achternaam'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je achternaam in.',
+                                message: 'Vul alsjeblieft de achternaam in.',
                                 whitespace: true
                             }
                         ]
@@ -514,16 +507,18 @@ class Verzorgers extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Geslacht">
                     {getFieldDecorator('verzorger-2-geslacht', {
+                        initialValue: this.props.formData['verzorger-2-geslacht'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft het geslacht van de leerkracht in.'
+                                message: 'Vul alsjeblieft het geslacht in.'
                             }
                         ]
                     })(
                         <Select>
                             <Option value="M">Man</Option>
                             <Option value="V">Vrouw</Option>
+                            <Option value="X">Overig</Option>
                         </Select>
                     )}
                 </Form.Item>
@@ -538,15 +533,17 @@ class Verzorgers extends Component<FormComponentProps & any> {
                     }
                 >
                     {getFieldDecorator('verzorger-2-telefoonnummer', {
+                        initialValue: this.props.formData['verzorger-2-telefoonnummer'],
                         rules: []
                     })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
                 </Form.Item>
                 <Form.Item label="Postcode">
                     {getFieldDecorator('verzorger-2-postcode', {
+                        initialValue: this.props.formData['verzorger-2-postcode'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je postcode in.',
+                                message: 'Vul alsjeblieft de postcode in.',
                                 whitespace: true
                             }
                         ]
@@ -554,10 +551,11 @@ class Verzorgers extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Huisnummer">
                     {getFieldDecorator('verzorger-2-huisnummer', {
+                        initialValue: this.props.formData['verzorger-2-huisnummer'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je huisnummer in.',
+                                message: 'Vul alsjeblieft het huisnummer in.',
                                 whitespace: true
                             }
                         ]
@@ -565,10 +563,11 @@ class Verzorgers extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Straat">
                     {getFieldDecorator('verzorger-2-straat', {
+                        initialValue: this.props.formData['verzorger-2-straat'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je straat in.',
+                                message: 'Vul alsjeblieft de straat in.',
                                 whitespace: true
                             }
                         ]
@@ -576,10 +575,11 @@ class Verzorgers extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="Woonplaats">
                     {getFieldDecorator('verzorger-2-woonplaats', {
+                        initialValue: this.props.formData['verzorger-2-woonplaats'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je woonplaats in.',
+                                message: 'Vul alsjeblieft de woonplaats in.',
                                 whitespace: true
                             }
                         ]
@@ -587,18 +587,24 @@ class Verzorgers extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item label="E-mailadres">
                     {getFieldDecorator('verzorger-2-email', {
+                        initialValue: this.props.formData['verzorger-2-email'],
                         rules: [
                             {
                                 required: true,
-                                message: 'Vul alsjeblieft je e-mailadres in.',
+                                message: 'Vul alsjeblieft het e-mailadres in.',
                                 whitespace: true
                             }
                         ]
                     })(<Input />)}
                 </Form.Item>
-                <Form.Item>
-                    <Button type="primary" htmlType="submit">
-                        Volgende
+                <Form.Item style={{ float: 'left' }}>
+                    <Button type="primary" style={{ float: 'left' }} onClick={this.props.back}>
+                        <Icon type="caret-left" /> Vorige
+                    </Button>
+                </Form.Item>
+                <Form.Item style={{ float: 'right' }}>
+                    <Button type="primary" htmlType="submit" style={{ float: 'right' }}>
+                        Volgende <Icon type="caret-right" />
                     </Button>
                 </Form.Item>
             </Form>
@@ -704,9 +710,14 @@ class Overig extends Component<FormComponentProps & any> {
                         </Checkbox>
                     )}
                 </Form.Item>
-                <Form.Item>
-                    <Button type="primary" htmlType="submit">
-                        Volgende
+                <Form.Item style={{ float: 'left' }}>
+                    <Button type="primary" style={{ float: 'left' }} onClick={this.props.back}>
+                        <Icon type="caret-left" /> Vorige
+                    </Button>
+                </Form.Item>
+                <Form.Item style={{ float: 'right' }}>
+                    <Button type="primary" htmlType="submit" style={{ float: 'right' }}>
+                        Volgende <Icon type="caret-right" />
                     </Button>
                 </Form.Item>
             </Form>
@@ -744,12 +755,6 @@ const Aanmelden: FunctionComponent = () => {
                                             Door het invullen van je persoonsgegevens ga je ermee
                                             akkoord dat deze gegevens beveiligd opgeslagen en
                                             verwerkt worden.
-                                        </span>
-                                        <br />
-                                        <br />
-                                        <span>
-                                            <b>Let op</b>: Indien u een account maakt voor uw zoon
-                                            of dochter, vul dan zijn/haar gegevens in.
                                         </span>
                                     </>
                                 }
