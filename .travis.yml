@@ -1,0 +1,18 @@
+language: node_js
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+    - '$HOME/.cache'
+
+before_install:
+  - npm install -g yarn
+
+install:
+  - yarn --silent
+
+script:
+  - yarn run tscheck
+  - yarn run tslint
+  - yarn run build
