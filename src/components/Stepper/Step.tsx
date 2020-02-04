@@ -7,6 +7,6 @@ interface Props {
     children: ReactNode;
 }
 
-const Step: FunctionComponent<Props> = () => <Fragment />;
+const Step: FunctionComponent<Props> = ({ children }) => <Fragment>{children}</Fragment>;
 
 export default Step;

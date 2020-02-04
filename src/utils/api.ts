@@ -28,12 +28,14 @@ const reportError = (error: Error) => {
 };
 
 export const sendFormData = async (formData: any) => {
-    const response: any = await api
+    /*const response: any = await api
         .post('/brugklas', {
             ...formData
         })
         .catch(error => {
             reportError(error);
         });
-    return response.data.result;
+    return response.data.result;*/
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    return true;
 };

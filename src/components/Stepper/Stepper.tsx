@@ -4,43 +4,19 @@ import Step from './Step';
 
 interface Props {
     children: ReactNode[];
-}
-
-interface State {
     step: number;
 }
 
-export default class Stepper extends Component<Props, State> {
+export default class Stepper extends Component<Props> {
     static Step = Step;
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            step: 0
-        };
-
-        this.back = this.back.bind(this);
-        this.forward = this.forward.bind(this);
-    }
-
-    back() {
-        const { step } = this.state;
-        this.setState({
-            step: step - 1
-        });
-    }
-
-    forward() {
-        const { step } = this.state;
-        this.setState({
-            step: step + 1
-        });
     }
 
     render() {
         const { children } = this.props;
-        const { step } = this.state;
+        const { step } = this.props;
 
         const steps = children.map((child: any) => child.props);
 
@@ -65,14 +41,7 @@ export default class Stepper extends Component<Props, State> {
                     ))}
                 </Steps>
                 <br />
-                {steps[step].children.length > 1
-                    ? steps[step].children.map(child =>
-                          cloneElement(child, { back: this.back, forward: this.forward })
-                      )
-                    : cloneElement(steps[step].children, {
-                          back: this.back,
-                          forward: this.forward
-                      })}
+                {children[step]}
             </Fragment>
         );
     }
