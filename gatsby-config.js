@@ -1,7 +1,7 @@
 module.exports = {
     siteMetadata: {
         title: 'Hageveld Brugklas',
-        siteUrl: 'https://brugklas.hageveld.dev',
+        siteUrl: 'https://brugklas.hageveld.nl',
         description: 'Aanmeldformulier voor de brugklas op het Atheneum College Hageveld',
         author: 'Atheneum College Hageveld',
         keywords: 'Atheneum, College, Hageveld, VWO, Heemstede, Groep 8, Brugklas, Basisschool'

@@ -3,7 +3,7 @@
   "description": "Aanmeldformulier voor de brugklas op het Atheneum College Hageveld",
   "version": "1.0.0",
   "author": "Luit Hollander <luit@hollander.email> (https://luit.me)",
-  "homepage": "https://brugklas.hageveld.dev",
+  "homepage": "https://brugklas.hageveld.nl",
   "repository": "https://github.com/hageveld/brugklas.git",
   "license": "MIT",
   "scripts": {

@@ -8,7 +8,7 @@ interface Props {
 
 const MetaData: FunctionComponent<Props> = ({  }: Props) => {
     const title = 'Hageveld Brugklas';
-    const siteUrl = 'https://brugklas.hageveld.dev';
+    const siteUrl = 'https://brugklas.hageveld.nl';
     const description = 'Aanmeldformulier voor de brugklas op het Atheneum College Hageveld';
     const author = 'Atheneum College Hageveld';
     const keywords = 'Atheneum, College, Hageveld, VWO, Heemstede, Groep 8, Brugklas, Basisschool';

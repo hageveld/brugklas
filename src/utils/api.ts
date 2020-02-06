@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { navigate } from 'gatsby';
 
-const API_ENDPOINT = 'https://api.hageveld.dev';
+const API_ENDPOINT = 'https://brugklas.hageveld.nl/api';
 
 const api = axios.create({
     baseURL: API_ENDPOINT
@@ -28,14 +28,12 @@ const reportError = (error: Error) => {
 };
 
 export const sendFormData = async (formData: any) => {
-    /*const response: any = await api
-        .post('/brugklas', {
+    const response: any = await api
+        .post('/submit.php', {
             ...formData
         })
         .catch(error => {
             reportError(error);
         });
-    return response.data.result;*/
-    await new Promise(resolve => setTimeout(resolve, 3000));
     return true;
 };
