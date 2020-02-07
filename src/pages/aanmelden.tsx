@@ -434,6 +434,8 @@ class Verzorgers extends Component<FormComponentProps & any> {
             </Select>
         );
 
+        const verzorger2nvt = this.props.form.getFieldValue('verzorger-2-nvt');
+
         return (
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>
                 <b>Ouder/verzorger 1</b>
@@ -550,43 +552,49 @@ class Verzorgers extends Component<FormComponentProps & any> {
                     })(<Input />)}
                 </Form.Item>
                 <b>Ouder/verzorger 2</b>
+                <Form.Item>
+                    {getFieldDecorator('verzorger-2-nvt', {
+                        valuePropName: 'checked',
+                        initialValue: false
+                    })(<Checkbox>Niet van toepassing (1-oudergezin)</Checkbox>)}
+                </Form.Item>
                 <Form.Item label="Voorletters">
                     {getFieldDecorator('verzorger-2-voorletters', {
                         rules: [
                             {
-                                required: true,
+                                required: !verzorger2nvt,
                                 message: 'Vul alsjeblieft de voorletters in.',
                                 whitespace: true
                             }
                         ]
-                    })(<Input />)}
+                    })(<Input disabled={verzorger2nvt} />)}
                 </Form.Item>
                 <Form.Item label="Tussenvoegsel">
                     {getFieldDecorator('verzorger-2-tussenvoegsel', {
                         rules: [{ whitespace: true }]
-                    })(<Input />)}
+                    })(<Input disabled={verzorger2nvt} />)}
                 </Form.Item>
                 <Form.Item label="Achternaam">
                     {getFieldDecorator('verzorger-2-achternaam', {
                         rules: [
                             {
-                                required: true,
+                                required: !verzorger2nvt,
                                 message: 'Vul alsjeblieft de achternaam in.',
                                 whitespace: true
                             }
                         ]
-                    })(<Input />)}
+                    })(<Input disabled={verzorger2nvt} />)}
                 </Form.Item>
                 <Form.Item label="Geslacht">
                     {getFieldDecorator('verzorger-2-geslacht', {
                         rules: [
                             {
-                                required: true,
+                                required: !verzorger2nvt,
                                 message: 'Vul alsjeblieft het geslacht in.'
                             }
                         ]
                     })(
-                        <Select>
+                        <Select disabled={verzorger2nvt}>
                             <Option value="M">Man</Option>
                             <Option value="V">Vrouw</Option>
                             <Option value="X">Overig</Option>
@@ -605,62 +613,68 @@ class Verzorgers extends Component<FormComponentProps & any> {
                 >
                     {getFieldDecorator('verzorger-2-telefoonnummer', {
                         rules: []
-                    })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
+                    })(
+                        <Input
+                            disabled={verzorger2nvt}
+                            addonBefore={prefixSelector}
+                            style={{ width: '100%' }}
+                        />
+                    )}
                 </Form.Item>
                 <Form.Item label="Postcode">
                     {getFieldDecorator('verzorger-2-postcode', {
                         rules: [
                             {
-                                required: true,
+                                required: !verzorger2nvt,
                                 message: 'Vul alsjeblieft de postcode in.',
                                 whitespace: true
                             }
                         ]
-                    })(<Input />)}
+                    })(<Input disabled={verzorger2nvt} />)}
                 </Form.Item>
                 <Form.Item label="Huisnummer">
                     {getFieldDecorator('verzorger-2-huisnummer', {
                         rules: [
                             {
-                                required: true,
+                                required: !verzorger2nvt,
                                 message: 'Vul alsjeblieft het huisnummer in.',
                                 whitespace: true
                             }
                         ]
-                    })(<Input />)}
+                    })(<Input disabled={verzorger2nvt} />)}
                 </Form.Item>
                 <Form.Item label="Straat">
                     {getFieldDecorator('verzorger-2-straat', {
                         rules: [
                             {
-                                required: true,
+                                required: !verzorger2nvt,
                                 message: 'Vul alsjeblieft de straat in.',
                                 whitespace: true
                             }
                         ]
-                    })(<Input />)}
+                    })(<Input disabled={verzorger2nvt} />)}
                 </Form.Item>
                 <Form.Item label="Woonplaats">
                     {getFieldDecorator('verzorger-2-woonplaats', {
                         rules: [
                             {
-                                required: true,
+                                required: !verzorger2nvt,
                                 message: 'Vul alsjeblieft de woonplaats in.',
                                 whitespace: true
                             }
                         ]
-                    })(<Input />)}
+                    })(<Input disabled={verzorger2nvt} />)}
                 </Form.Item>
                 <Form.Item label="E-mailadres">
                     {getFieldDecorator('verzorger-2-email', {
                         rules: [
                             {
-                                required: true,
+                                required: !verzorger2nvt,
                                 message: 'Vul alsjeblieft het e-mailadres in.',
                                 whitespace: true
                             }
                         ]
-                    })(<Input />)}
+                    })(<Input disabled={verzorger2nvt} />)}
                 </Form.Item>
                 <Form.Item style={{ float: 'left' }}>
                     <Button type="primary" style={{ float: 'left' }} onClick={this.back}>
@@ -708,16 +722,6 @@ class Overig extends Component<FormComponentProps & any> {
 
         return (
             <Form onSubmit={this.handleSubmit}>
-                <Form.Item label="Gezinssamenstelling (aantal kinderen)">
-                    {getFieldDecorator('gezinssamenstelling', {
-                        rules: [
-                            {
-                                required: true,
-                                message: '* Vereist'
-                            }
-                        ]
-                    })(<Input />)}
-                </Form.Item>
                 <Form.Item label="Aantal kinderen op Hageveld">
                     {getFieldDecorator('aantal-kinderen-hageveld', {
                         rules: [
@@ -749,9 +753,8 @@ class Overig extends Component<FormComponentProps & any> {
                         initialValue: true
                     })(
                         <Checkbox>
-                            Ik ga er mee akkoord dat de naam en het geslacht van de leerling (indien
-                            toegelaten) gepubliceerd wordt in de indeling van de brugklas
-                            (optioneel)
+                            Ik ga er mee akkoord dat de naam van de leerling (indien toegelaten)
+                            gepubliceerd wordt in de indeling van de brugklas (optioneel)
                         </Checkbox>
                     )}
                 </Form.Item>

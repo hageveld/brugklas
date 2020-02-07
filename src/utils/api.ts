@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { navigate } from 'gatsby';
+import querystring from 'querystring';
 
 const API_ENDPOINT = 'https://brugklas.hageveld.nl/api';
 
@@ -29,9 +30,7 @@ const reportError = (error: Error) => {
 
 export const sendFormData = async (formData: any) => {
     const response: any = await api
-        .post('/submit.php', {
-            ...formData
-        })
+        .post('/submit.php', querystring.stringify(formData))
         .catch(error => {
             reportError(error);
         });
