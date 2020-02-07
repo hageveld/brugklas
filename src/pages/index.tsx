@@ -44,10 +44,13 @@ const Index: FunctionComponent<any> = () => {
                     <div>Schrijf je nu in voor de brugklas!</div>
                     <br />
                     <Link to="/aanmelden">
-                        <Button type="primary">
+                        <Button type="primary" disabled={true}>
                             <Icon type="edit" /> Aanmelden
                         </Button>
                     </Link>
+                    <br />
+                    <br />
+                    <i>Aanmelden is mogelijk vanaf 10 februari 2020.</i>
                 </Col>
             </Row>
         </Layout>
