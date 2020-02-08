@@ -54,7 +54,14 @@ const Footer: FunctionComponent = () => (
     <Fragment>
         <Divider />
         <Row>
-            <Col span={6} offset={1}>
+            <Col
+                xs={{ span: 22, offset: 1 }}
+                sm={{ span: 22, offset: 1 }}
+                md={{ span: 6, offset: 1 }}
+                lg={{ span: 6, offset: 1 }}
+                xl={{ span: 6, offset: 1 }}
+                xxl={{ span: 6, offset: 1 }}
+            >
                 <div>
                     <img
                         width="32"
@@ -96,7 +103,14 @@ const Footer: FunctionComponent = () => (
                     </Row>
                 </div>
             </Col>
-            <Col span={6} offset={2}>
+            <Col
+                xs={{ span: 0, offset: 2 }}
+                sm={{ span: 0, offset: 2 }}
+                md={{ span: 6, offset: 2 }}
+                lg={{ span: 6, offset: 2 }}
+                xl={{ span: 6, offset: 2 }}
+                xxl={{ span: 6, offset: 2 }}
+            >
                 <Map center={position} zoom={15} height={200}>
                     <Marker
                         anchor={position}
@@ -105,7 +119,14 @@ const Footer: FunctionComponent = () => (
                     />
                 </Map>
             </Col>
-            <Col span={6} offset={3}>
+            <Col
+                xs={{ span: 0, offset: 3 }}
+                sm={{ span: 0, offset: 3 }}
+                md={{ span: 6, offset: 3 }}
+                lg={{ span: 6, offset: 3 }}
+                xl={{ span: 6, offset: 3 }}
+                xxl={{ span: 6, offset: 3 }}
+            >
                 <h2>Contact</h2>
                 <div>
                     Atheneum College Hageveld

@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { ApplicationState } from './index';
-import { authReducer, AuthActions } from './auth';
+import { debugReducer, DebugActions } from './debug';
 
-export type ApplicationActions = AuthActions;
+export type ApplicationActions = DebugActions;
 
 const rootReducer = combineReducers<ApplicationState>({
-    auth: authReducer
+    debug: debugReducer
 });
 
 export default rootReducer;

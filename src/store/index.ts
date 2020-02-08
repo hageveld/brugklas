@@ -1,10 +1,10 @@
-import { AuthState } from './auth';
+import { DebugState } from './debug';
 import { configureStore } from './configureStore';
 
 const { store, persistor } = configureStore();
 
 export interface ApplicationState {
-    auth: AuthState;
+    debug: DebugState;
 }
 
 export * from './configureStore';

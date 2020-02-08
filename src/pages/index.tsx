@@ -4,6 +4,7 @@ import { Row, Col, Button, Carousel, Icon } from 'antd';
 import { Link } from 'gatsby';
 import Title from '../components/Title';
 import { useSelector } from '../hooks';
+import moment from 'moment';
 
 import Hageveld from '../images/hageveld_front.jpg';
 import Kluisjes from '../images/1_kluisjes.jpg';
@@ -14,13 +15,22 @@ import Lokaal from '../images/4_lokaal.jpg';
 import '../sass/index.scss';
 
 const Index: FunctionComponent<any> = () => {
-    const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+    const timeCheckDisabled = useSelector(state => state.debug.disableTimeCheck);
+    const validDate = moment().isAfter('2020-02-10');
 
     return (
         <Layout>
             <Title centered={true}>Hageveld</Title>
             <Row style={{ marginLeft: '5%', marginRight: '5%' }}>
-                <Col span={12} style={{ paddingRight: '5%' }}>
+                <Col
+                    style={{ paddingRight: '5%' }}
+                    xs={{ span: 24 }}
+                    sm={{ span: 24 }}
+                    md={{ span: 12 }}
+                    lg={{ span: 12 }}
+                    xl={{ span: 12 }}
+                    xxl={{ span: 12 }}
+                >
                     <Carousel autoplay={true}>
                         <div>
                             <img width="100%" height="100%" src={Hageveld} alt="Hageveld" />
@@ -44,7 +54,7 @@ const Index: FunctionComponent<any> = () => {
                     <div>Schrijf je nu in voor de brugklas!</div>
                     <br />
                     <Link to="/aanmelden">
-                        <Button type="primary" disabled={true}>
+                        <Button type="primary" disabled={!validDate && !timeCheckDisabled}>
                             <Icon type="edit" /> Aanmelden
                         </Button>
                     </Link>
