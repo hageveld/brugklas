@@ -111,7 +111,14 @@ const Footer: FunctionComponent = () => (
                 xl={{ span: 6, offset: 2 }}
                 xxl={{ span: 6, offset: 2 }}
             >
-                <Map center={position} zoom={15} height={200}>
+                <Map
+                    center={position}
+                    zoom={15}
+                    height={200}
+                    provider={(x, y, z, dpr) =>
+                        `http://a.tile.openstreetmap.org/${z}/${x}/${y}.png`
+                    }
+                >
                     <Marker
                         anchor={position}
                         payload={1}

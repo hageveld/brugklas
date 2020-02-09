@@ -4,6 +4,9 @@ import React, { FunctionComponent, Component, useState } from 'react';
 import Layout from '../components/Layout';
 import Stepper from '../components/Stepper';
 import ExternalLink from '../components/ExternalLink';
+import FormPDF from '../components/FormPDF';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import { randomBytes } from 'crypto';
 import {
     Row,
     Col,
@@ -16,7 +19,9 @@ import {
     Tooltip,
     Alert,
     Checkbox,
-    DatePicker
+    DatePicker,
+    List,
+    Avatar
 } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import Title from '../components/Title';
@@ -827,9 +832,14 @@ const WrappedOverig: any = Form.create({ name: 'overig' })(Overig);
 const Aanmelden: FunctionComponent = () => {
     const timeCheckDisabled = useSelector(state => state.debug.disableTimeCheck);
     const validDate = moment().isAfter('2020-02-10');
+    const randomData = randomBytes(256)
+        .toString('hex')
+        .substring(0, 6);
+    const forceClosed = false;
 
     const [loading, setLoading] = useState(false);
-    const [saved, setSaved] = useState(true);
+    const [saved, setSaved] = useState(false);
+    const [done, setDone] = useState(false);
     const [formData, setFormData] = useState({});
     const [step, setStep] = useState(0);
 
@@ -856,7 +866,7 @@ const Aanmelden: FunctionComponent = () => {
                     xl={{ span: 16, offset: 4 }}
                     xxl={{ span: 12, offset: 6 }}
                 >
-                    {validDate || timeCheckDisabled ? (
+                    {!forceClosed && (validDate || timeCheckDisabled) ? (
                         <Stepper step={step}>
                             <Step title="Gegevens" icon="user" description="Persoonsgegevens">
                                 <Alert
@@ -910,7 +920,7 @@ const Aanmelden: FunctionComponent = () => {
                             </Step>
                             <Step
                                 title="Einde"
-                                icon={loading || !saved ? 'loading' : 'check'}
+                                icon={step === 4 && (loading || !saved) ? 'loading' : 'check'}
                                 description="Klaar!"
                             >
                                 {loading ? (
@@ -919,32 +929,99 @@ const Aanmelden: FunctionComponent = () => {
                                         subTitle="Een moment geduld alstublieft"
                                         icon={<Icon type="loading" />}
                                     />
-                                ) : saved ? (
+                                ) : done ? (
                                     <Result
                                         status="success"
                                         title="Succesvol aangemeld!"
                                         subTitle={
-                                            <h3>
+                                            <a onClick={() => setDone(false)}>
                                                 <br />
-                                                Neem alstublieft contact met ons op om een afspraak
-                                                te maken voor een aanmeldingsgesprek. U kunt bellen
-                                                tussen 9.00 uur en 16.30 uur naar telefoonnummer
-                                                023-5100100.
-                                            </h3>
+                                                <Icon type="arrow-left" /> Bestand nog een keer
+                                                downloaden
+                                            </a>
                                         }
                                     />
                                 ) : (
-                                    <>
-                                        Download uw formulier
-                                        <Button
-                                            type="primary"
-                                            shape="round"
-                                            icon="download"
-                                            size="large"
-                                        >
-                                            Download
-                                        </Button>
-                                    </>
+                                    <Alert
+                                        type="info"
+                                        showIcon={true}
+                                        message={<h2>U bent bijna klaar</h2>}
+                                        description={
+                                            <>
+                                                <List itemLayout="horizontal">
+                                                    <List.Item>
+                                                        <List.Item.Meta
+                                                            avatar={
+                                                                <Avatar
+                                                                    style={{
+                                                                        color: '#f56a00',
+                                                                        backgroundColor: '#fde3cf'
+                                                                    }}
+                                                                    icon="download"
+                                                                />
+                                                            }
+                                                            title={
+                                                                <h2>
+                                                                    Download uw formulier. U wordt
+                                                                    geacht deze uit te printen en
+                                                                    mee te nemen naar het
+                                                                    aanmeldingsgesprek.
+                                                                </h2>
+                                                            }
+                                                        />
+                                                    </List.Item>
+                                                    <List.Item>
+                                                        <List.Item.Meta
+                                                            avatar={
+                                                                <Avatar
+                                                                    style={{
+                                                                        color: '#f56a00',
+                                                                        backgroundColor: '#fde3cf'
+                                                                    }}
+                                                                    icon="phone"
+                                                                />
+                                                            }
+                                                            title={
+                                                                <h2>
+                                                                    Neem alstublieft contact met ons
+                                                                    op om een afspraak te maken voor
+                                                                    een aanmeldingsgesprek. U kunt
+                                                                    bellen tussen 9.00 uur en 16.30
+                                                                    uur naar telefoonnummer
+                                                                    023-5100100.
+                                                                </h2>
+                                                            }
+                                                        />
+                                                    </List.Item>
+                                                </List>
+                                                <br />
+                                                <PDFDownloadLink
+                                                    document={<FormPDF data={formData} />}
+                                                    fileName={`Aanmeldformulier Brugklas Hageveld ${randomData}`}
+                                                >
+                                                    <Button
+                                                        type="primary"
+                                                        shape="round"
+                                                        icon="download"
+                                                        size="large"
+                                                        onClick={() => setSaved(true)}
+                                                    >
+                                                        Download
+                                                    </Button>
+                                                </PDFDownloadLink>{' '}
+                                                <Button
+                                                    type="default"
+                                                    shape="round"
+                                                    icon="check"
+                                                    size="large"
+                                                    disabled={!saved}
+                                                    onClick={() => setDone(true)}
+                                                >
+                                                    Begrepen
+                                                </Button>
+                                            </>
+                                        }
+                                    />
                                 )}
                             </Step>
                         </Stepper>

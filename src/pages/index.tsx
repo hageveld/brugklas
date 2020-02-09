@@ -60,7 +60,10 @@ const Index: FunctionComponent<any> = () => {
                     </Link>
                     <br />
                     <br />
-                    <i>Aanmelden is mogelijk vanaf 10 februari 2020.</i>
+                    <i>
+                        Aanmelden is mogelijk vanaf 10 februari 2020 tot en met 9 maart 2020 (21:00
+                        uur).
+                    </i>
                 </Col>
             </Row>
         </Layout>
