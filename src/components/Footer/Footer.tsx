@@ -116,7 +116,7 @@ const Footer: FunctionComponent = () => (
                     zoom={15}
                     height={200}
                     provider={(x, y, z, dpr) =>
-                        `http://a.tile.openstreetmap.org/${z}/${x}/${y}.png`
+                        `https://a.tile.openstreetmap.org/${z}/${x}/${y}.png`
                     }
                 >
                     <Marker
