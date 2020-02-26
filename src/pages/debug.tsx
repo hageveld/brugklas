@@ -4,12 +4,14 @@ import { Row, Col, Button, Icon, Checkbox, Alert } from 'antd';
 import { Link } from 'gatsby';
 import Title from '../components/Title';
 import { useSelector, useDispatch } from '../hooks';
-import { disableTimeCheck } from '../store/debug';
+import { switchApiMock, switchDataMock, disableTimeCheck } from '../store/debug';
 import moment from 'moment';
 
 import '../sass/index.scss';
 
 const Debug: FunctionComponent<any> = () => {
+    const apiMockEnabled = useSelector(state => state.debug.mockAPI);
+    const dataMockEnabled = useSelector(state => state.debug.mockData);
     const timeCheckDisabled = useSelector(state => state.debug.disableTimeCheck);
     const dispatch = useDispatch();
     const currentTime = moment().format('DD-MM-YYYY HH:mm:ss Z');
@@ -33,6 +35,14 @@ const Debug: FunctionComponent<any> = () => {
                     <br />
                     <br />
                     <h1>Opties</h1>
+                    <Checkbox checked={apiMockEnabled} onChange={() => dispatch(switchApiMock())}>
+                        Verzend data niet naar server
+                    </Checkbox>
+                    <br /> <br />
+                    <Checkbox checked={dataMockEnabled} onChange={() => dispatch(switchDataMock())}>
+                        Vul formulier met willekeurige data
+                    </Checkbox>
+                    <br /> <br />
                     <Checkbox
                         checked={timeCheckDisabled}
                         onChange={() => dispatch(disableTimeCheck())}

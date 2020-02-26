@@ -143,8 +143,8 @@ const FormPDF: FunctionComponent<Props> = ({ data }) => {
                         {newline}
                         {newline}
                         <Text style={italic}>Overige informatie</Text> {newline}
-                        <Text style={bold}>Aantal kinderen op Hageveld</Text>:{' '}
-                        {data['aantal-kinderen-hageveld'] || '(nvt)'} {newline}
+                        <Text style={bold}>Kinderen op Hageveld</Text>:{' '}
+                        {data['aantal-kinderen-hageveld'] ? 'Ja' : 'Nee'} {newline}
                         <Text style={bold}>Toestemming adres SRH</Text>:{' '}
                         {data['adres-toestemming-SRH'] ? 'Ja' : 'Nee'} {newline}
                         <Text style={bold}>Toestemming plaatsing website</Text>:{' '}

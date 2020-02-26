@@ -27,6 +27,7 @@ import { FormComponentProps } from 'antd/lib/form';
 import Title from '../components/Title';
 import { sendFormData } from '../utils/api';
 import { validateBSN } from '../utils/bsn';
+import * as mock from '../utils/mock';
 import { Link } from 'gatsby';
 import { useSelector } from '../hooks';
 import moment from 'moment';
@@ -65,6 +66,7 @@ class Persoonsgegevens extends Component<FormComponentProps & any> {
     }
 
     render() {
+        const dataMockEnabled = this.props.mockData;
         const { getFieldDecorator } = this.props.form;
 
         const prefixSelector = getFieldDecorator('prefix', {
@@ -733,16 +735,6 @@ class Overig extends Component<FormComponentProps & any> {
 
         return (
             <Form onSubmit={this.handleSubmit}>
-                <Form.Item label="Aantal kinderen op Hageveld">
-                    {getFieldDecorator('aantal-kinderen-hageveld', {
-                        rules: [
-                            {
-                                required: true,
-                                message: '* Vereist'
-                            }
-                        ]
-                    })(<Input />)}
-                </Form.Item>
                 <Form.Item>
                     {getFieldDecorator('adres-toestemming-SRH', {
                         valuePropName: 'checked',
@@ -768,6 +760,12 @@ class Overig extends Component<FormComponentProps & any> {
                             gepubliceerd wordt in de indeling van de brugklas (optioneel)
                         </Checkbox>
                     )}
+                </Form.Item>
+                <Form.Item>
+                    {getFieldDecorator('aantal-kinderen-hageveld', {
+                        valuePropName: 'checked',
+                        initialValue: false
+                    })(<Checkbox>Ik heb momenteel één of meerdere kinderen op Hageveld</Checkbox>)}
                 </Form.Item>
                 <Form.Item>
                     {getFieldDecorator('bekend-met-procedure', {
@@ -830,6 +828,8 @@ const WrappedVerzorgers: any = Form.create({ name: 'verzorgers' })(Verzorgers);
 const WrappedOverig: any = Form.create({ name: 'overig' })(Overig);
 
 const Aanmelden: FunctionComponent = () => {
+    const apiMockEnabled = useSelector(state => state.debug.mockAPI);
+    const dataMockEnabled = useSelector(state => state.debug.mockData);
     const timeCheckDisabled = useSelector(state => state.debug.disableTimeCheck);
     const validDate = moment().isAfter('2020-02-10');
     const randomData = randomBytes(256)
@@ -847,12 +847,33 @@ const Aanmelden: FunctionComponent = () => {
     const forward = () => setStep(step + 1);
 
     const sendData = () => {
-        setLoading(true);
         (formData as any).geboortedatum = (formData as any).geboortedatum.format('DD-MM-YYYY');
-        sendFormData(formData).then(response => {
-            setLoading(false);
-        });
+        if (!apiMockEnabled) {
+            setLoading(true);
+            sendFormData(formData).then(response => {
+                setLoading(false);
+            });
+        }
     };
+
+    if (dataMockEnabled && !('roepnaam' in formData)) {
+        setFormData({
+            ...formData,
+            roepnaam: mock.roepnaam(),
+            voornamen: mock.voornamen(),
+            achternaam: mock.achternaam(),
+            geslacht: mock.geslacht(),
+            bsn: mock.bsn(),
+            geboortedatum: moment(mock.geboortedatum()),
+            geboorteplaats: mock.geboorteplaats(),
+            postcode: mock.postcode(),
+            huisnummer: mock.huisnummer(),
+            straat: mock.straat(),
+            woonplaats: mock.woonplaats(),
+            advies: mock.advies(),
+            'havo-advies-toestemming': true
+        });
+    }
 
     return (
         <Layout>
@@ -887,6 +908,7 @@ const Aanmelden: FunctionComponent = () => {
                                     formData={formData}
                                     setFormData={setFormData}
                                     forward={forward}
+                                    mockData={dataMockEnabled}
                                 />
                             </Step>
                             <Step title="School" icon="bank" description="Basisschool">
@@ -997,7 +1019,7 @@ const Aanmelden: FunctionComponent = () => {
                                                 <br />
                                                 <PDFDownloadLink
                                                     document={<FormPDF data={formData} />}
-                                                    fileName={`Aanmeldformulier Brugklas Hageveld ${randomData}`}
+                                                    fileName={`Aanmeldformulier Brugklas Hageveld ${randomData}.pdf`}
                                                 >
                                                     <Button
                                                         type="primary"
