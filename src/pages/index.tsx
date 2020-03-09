@@ -16,7 +16,7 @@ import '../sass/index.scss';
 
 const Index: FunctionComponent<any> = () => {
     const timeCheckDisabled = useSelector(state => state.debug.disableTimeCheck);
-    const validDate = moment().isAfter('2020-02-10');
+    const validDate = false;//moment().isAfter('2020-02-10');
 
     return (
         <Layout>
