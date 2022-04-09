@@ -52,7 +52,7 @@
     "gatsby-transformer-sharp": "2.1.17",
     "gatsby-transformer-yaml": "2.1.12",
     "less": "3.10.3",
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "node-sass": "4.11.0",
     "pigeon-maps": "0.14.0",
     "pigeon-marker": "0.3.4",
